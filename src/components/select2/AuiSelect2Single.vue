@@ -14,7 +14,9 @@
     props: {
       allowClear: Boolean,
       minimumResultsForSearch: Number,
-      value: String,
+      value: {
+        type: [String,Number]
+      }
     },
 
     mounted() {
