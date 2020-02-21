@@ -1,5 +1,5 @@
 <template>
-  <li :class="{'aui-nav-selected': this.selected}" @click="$emit('click')">
+  <li :class="{'aui-nav-selected': this.active}" @click="$emit('click')">
     <a :href="href">
       <va-icon class="nav-item-icon" v-if="icon">{{ icon }}</va-icon>
       {{name}}
@@ -14,6 +14,11 @@
       href: String,
       selected: Boolean,
       icon: String
+    },
+    data() {
+      return {
+        active: this.selected
+      }
     }
   }
 </script>

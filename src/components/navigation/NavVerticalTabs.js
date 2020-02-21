@@ -11,7 +11,7 @@ export default {
           .forEach(tab => {
             tab.componentOptions.propsData.selected = tab.componentOptions.propsData.name === this.selectedTab
             tab.data.on = {
-              click: () => this.selectedTab = tab.componentOptions.propsData.name
+              click: () => this.clicked(tab)
             }
           });
       }
@@ -40,7 +40,14 @@ export default {
 
   methods: {
     clicked(tab) {
-      this.selectedTab = tab.data.attrs.name
+      this.selectedTab = tab.componentOptions.propsData.name
+      this.updateItemsSelected()
+    },
+
+    updateItemsSelected() {
+      this.getItems().filter(tab => {
+        tab.componentInstance.$data.active = tab.componentOptions.propsData.name === this.selectedTab
+      })
     },
 
     getGroupsAndHeaders() {
