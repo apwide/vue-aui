@@ -4,6 +4,7 @@
       <ul class="tabs-menu">
         <li v-for="tab in tabs" :key="tab.id" class="menu-item">
           <a
+            @click.prevent.stop="selectTab(tab.id)"
             :ref="`tab_link_${tab.id}`"
             :href="'#' + tab.id"
             v-html="tab.name"
@@ -27,7 +28,6 @@ export default {
     AJS.tabs.setup();
   },
   updated() {
-    console.log("tabs updated");
     this.updateTabs();
   },
   methods: {
@@ -41,10 +41,8 @@ export default {
       return activeTab.length && activeTab.is(":visible");
     },
     selectTab(id) {
-      console.log("ID", id);
       this.$nextTick(() => {
         const tabLinks = this.$refs[`tab_link_${id}`];
-        console.log("TABLINKS", tabLinks);
         if (tabLinks && tabLinks.length) {
           let $tabLink = AJS.$(tabLinks[0]);
           AJS.tabs.change($tabLink);
